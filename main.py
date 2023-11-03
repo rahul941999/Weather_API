@@ -13,7 +13,7 @@ def home_page():
 
 
 @app.route("/api/v1/<station>/<date>")
-def dately(station, date):
+def datewise(station, date):
     df = pd.read_csv(f"Data/{station}.csv")
     tmp = df.loc[df["time"] == date]["tavg"].squeeze()
     if tmp:
@@ -24,13 +24,13 @@ def dately(station, date):
 
 
 @app.route("/api/v1/<station>")
-def stationly(station):
+def City_wise(station):
     df = pd.read_csv(f"Data/{station}.csv")
     station_data = df.to_dict(orient="records")
     return station_data
 
 
-@app.route("/api/v1/<station>/<year>/yearly")
+@app.route("/api/v1/<station>/yearly/<year>")
 def yearly(station, year):
     df = pd.read_csv(f"Data/{station}.csv")
     df["time"] = df["time"].astype(str)
